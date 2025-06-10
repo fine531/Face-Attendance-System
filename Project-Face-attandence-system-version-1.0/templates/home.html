@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Attendance Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="bg-[#1a1a2e] text-white min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-800 p-5 flex flex-col space-y-6 shadow-lg">
+        <h1 class="text-2xl font-bold text-yellow-400">AI Dashboard</h1>
+        <nav class="space-y-4">
+            <a href="{% url 'capture_student' %}" class="flex items-center gap-2 hover:text-yellow-400"><i class="fas fa-user-plus"></i> Student Registration</a>
+            <a href="{% url 'student-list' %}" class="flex items-center gap-2 hover:text-yellow-400"><i class="fas fa-user-friends"></i> Manage Students</a>
+            <a href="{% url 'capture_and_recognize' %}" class="flex items-center gap-2 hover:text-yellow-400"><i class="fas fa-camera"></i> Mark Attendance</a>
+            <a href="{% url 'student_attendance_list' %}" class="flex items-center gap-2 hover:text-yellow-400"><i class="fas fa-list"></i> Attendance Details</a>
+            <a href="{% url 'camera_config_list' %}" class="flex items-center gap-2 hover:text-yellow-400"><i class="fas fa-video"></i> Manage Cameras</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 space-y-8">
+        <h2 class="text-3xl font-bold text-yellow-300">Face Based Student Attendance System</h2>
+
+        <!-- Dashboard Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Total Students Card -->
+            <a href="{% url 'student-list' %}" aria-label="View all students" role="link" class="block bg-[#232946] rounded-2xl p-6 shadow-lg hover:scale-105 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fas fa-user-graduate text-2xl text-yellow-400"></i>
+                    <h3 class="text-lg text-yellow-300">Total Students</h3>
+                </div>
+                <p class="text-3xl font-bold mt-2">{{ total_students }}</p>
+            </a>
+
+            <!-- Total Attendance Records Card -->
+            <a href="{% url 'student_attendance_list' %}" aria-label="View all attendance records" role="link" class="block bg-[#232946] rounded-2xl p-6 shadow-lg hover:scale-105 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fas fa-calendar-check text-2xl text-yellow-400"></i>
+                    <h3 class="text-lg text-yellow-300">Total Attendance Records</h3>
+                </div>
+                <p class="text-3xl font-bold mt-2">{{ total_attendance }}</p>
+            </a>
+
+            <!-- Total Check-Ins Card -->
+            <a href="{% url 'student_attendance_list' %}?filter=checkin" aria-label="View all check-ins" role="link" class="block bg-[#232946] rounded-2xl p-6 shadow-lg hover:scale-105 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fas fa-sign-in-alt text-2xl text-yellow-400"></i>
+                    <h3 class="text-lg text-yellow-300">Total Check-Ins</h3>
+                </div>
+                <p class="text-3xl font-bold mt-2">{{ total_check_ins }}</p>
+            </a>
+
+            <!-- Total Check-Outs Card -->
+            <a href="{% url 'student_attendance_list' %}?filter=checkout" aria-label="View all check-outs" role="link" class="block bg-[#232946] rounded-2xl p-6 shadow-lg hover:scale-105 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fas fa-sign-out-alt text-2xl text-yellow-400"></i>
+                    <h3 class="text-lg text-yellow-300">Total Check-Outs</h3>
+                </div>
+                <p class="text-3xl font-bold mt-2">{{ total_check_outs }}</p>
+            </a>
+
+            <!-- Total Cameras Card -->
+            <a href="{% url 'camera_config_list' %}" aria-label="View all cameras" role="link" class="block bg-[#232946] rounded-2xl p-6 shadow-lg hover:scale-105 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fas fa-video text-2xl text-yellow-400"></i>
+                    <h3 class="text-lg text-yellow-300">Total Cameras</h3>
+                </div>
+                <p class="text-3xl font-bold mt-2">{{ total_cameras }}</p>
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>
