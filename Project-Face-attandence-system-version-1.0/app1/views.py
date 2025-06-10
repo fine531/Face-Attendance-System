@@ -144,7 +144,7 @@ def capture_student(request):
                     <p>Hello {name},</p>
                     <p>Congratulations! Your registration for class <b>{student_class}</b> was successful.</p>
                     <p>Thank you for joining us.<br>
-                    <img src='https://dummyimage.com/120x40/007bff/fff&text=Logo' alt='Logo' width='120'></p>
+                    <img src='https://www.geminatecs.com/web/image/product.product/777/image' alt='Logo' width='120'></p>
                     <p>Best regards,<br>The Face Attendance System Team</p>
                   </body>
                 </html>
