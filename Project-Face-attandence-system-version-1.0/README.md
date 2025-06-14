@@ -1,5 +1,17 @@
 # Face Attendance System
 
+## Quick Start Checklist (for New Users)
+
+1. **Use Python 3.10 or 3.11** (do not use 3.13+; some dependencies may not work).
+2. **Create and activate a virtual environment** before installing dependencies.
+3. **Install all requirements** from `requirements.txt`.
+4. **Run migrations** to set up the database.
+5. **Create a Django superuser** (admin account).
+6. **Start the server and log in to the admin panel**.
+7. **Add at least one camera configuration** in the admin panel (required for the app to work).
+
+---
+
 ## Project Overview
 
 The Face Attendance System is a modern, AI-powered web application designed for educational institutions and organizations to automate and secure the process of student attendance. Leveraging advanced facial recognition technology, this system eliminates manual roll calls, reduces errors, and enhances security. It provides a seamless experience for both students and administrators, with real-time attendance tracking, email notifications, and a user-friendly dashboard.
@@ -55,7 +67,7 @@ The Face Attendance System is a modern, AI-powered web application designed for 
 - Secure authentication and role-based access
 
 ## Prerequisites
-- Python 3.8+
+- Python 3.10 or 3.11 (do not use 3.13+)
 - pip
 - (Optional) Virtual environment tool (venv, virtualenv)
 - Webcam or IP camera (for face recognition)
@@ -70,12 +82,16 @@ The Face Attendance System is a modern, AI-powered web application designed for 
 
 2. **Create and activate a virtual environment:**
    ```bash
+   # Create virtual environment
    python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
+   # On Windows (PowerShell):
+   .\venv\Scripts\Activate.ps1
+   # On Windows (cmd):
+   venv\Scripts\activate.bat
    # On Mac/Linux:
    source venv/bin/activate
    ```
+   **If you see 'No module named django' or similar errors, make sure your virtual environment is activated!**
 
 3. **Install dependencies:**
    ```bash
@@ -91,6 +107,41 @@ The Face Attendance System is a modern, AI-powered web application designed for 
    ```bash
    python manage.py createsuperuser
    ```
+   - Enter a username, email, and password when prompted. Save these credentials.
+
+6. **Start the development server:**
+   ```bash
+   python manage.py runserver
+   ```
+   - Access the app at [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+7. **Log in to the admin panel:**
+   - Go to [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+   - Use the superuser credentials you created above.
+
+8. **Add a Camera Configuration (REQUIRED):**
+   - In the admin panel, find **Camera Configurations**.
+   - Click **Add** and fill in:
+     - **Name:** (e.g., Default Camera)
+     - **Camera Source:** `0` for your default webcam, or the stream URL for an IP camera.
+     - **Threshold:** (leave default or set as needed)
+   - Save the configuration.
+   - Without this, you will see an error: "No camera configurations found. Please configure them in the admin panel."
+
+---
+
+## Common Errors & Fixes
+
+- **No module named 'django'**
+  - Solution: Activate your virtual environment before running any Django commands.
+- **No camera configurations found**
+  - Solution: Log in to the admin panel and add a camera configuration as described above.
+- **Migrations not applied / Internal Server Error**
+  - Solution: Run `python manage.py migrate` after activating your virtual environment.
+- **Wrong Python version / Dependency install errors**
+  - Solution: Use Python 3.10 or 3.11. Do not use 3.13+.
+- **Admin login not working**
+  - Solution: Make sure you created a superuser with `python manage.py createsuperuser` and are using the correct credentials.
 
 ## Email Notifications Setup
 
@@ -111,14 +162,6 @@ This project uses Gmail SMTP to send registration and authorization emails to st
 4. Restart your Django server.
 
 **Note:** Never commit your real Gmail or app password to public repositories.
-
-## Running the Project
-
-1. Start the development server:
-   ```bash
-   python manage.py runserver
-   ```
-2. Access the app at [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ## Usage
 - **Student Registration:** Students register via the registration page (with webcam capture).
